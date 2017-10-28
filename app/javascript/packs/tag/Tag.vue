@@ -7,7 +7,7 @@
 
 <script>
 export default {
-  name: 'book',
+  name: 'tag',
   created() {
     fetch('tags.json')
     .then((res) => { return res.json() })
@@ -22,7 +22,7 @@ export default {
   },
   methods: {
     addTag() {
-      this.$http.post('books.json', {title: this.addbook}, {})
+      this.$http.post('tags.json', {name: this.addtag}, {})
         .then((res) => window.location = "/tags")
         .catch( (error) => console.log('Got a problem' + error));
     }
