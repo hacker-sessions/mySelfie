@@ -6,14 +6,22 @@ Made with Ruby on Rails, Vue JS and :heart:
 * yarn
 * foreman
 
-##Setup
+## Setup 
 ```
 $ bin/setup
 ```
 
-##Run
+## Run
 ```
 $ foreman start -f Procfile.dev -p 3000
 ```
+`http://localhost:3000/tags`
+
+## Setup with docker
+```
+$ docker-compose build
+$ docker-compose run --rm website bin/setup
+```
+`http://localhost:5000/tags`
 
  
