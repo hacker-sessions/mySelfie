@@ -1,11 +1,9 @@
 FROM ruby:2.4.1
 
+# Set install path
+ENV INSTALL_PATH /usr/src/app
 
-# Set environment variables
-ENV LANG C.UTF-8
-ENV ROOT_PATH /usr/src/app
-
-# Install essential libraries
+# Install dependencies
 RUN apt-get update && apt-get install -y build-essential libpq-dev
 
 # Install node.js
@@ -21,16 +19,19 @@ RUN apt-get update && apt-get install -y curl apt-transport-https wget && \
 # Fix: 'Cannot find module 'node-sass'
 RUN yarn add node-sass
 
-# Move to root
-RUN mkdir $ROOT_PATH
-WORKDIR $ROOT_PATH
+# Create the main directory
+RUN mkdir $INSTALL_PATH
 
-# Bundle install
-ADD Gemfile $ROOT_PATH/Gemfile
-ADD Gemfile.lock $ROOT_PATH/Gemfile.lock
+# Set the main directory to INSTALL_PATH
+WORKDIR $INSTALL_PATH
+
+# Install gems
+ADD Gemfile $INSTALL_PATH/Gemfile
+ADD Gemfile.lock $INSTALL_PATH/Gemfile.lock
 RUN bundle install
 
 # Install foreman
 RUN gem install foreman
 
-ADD . $ROOT_PATH
+# Copy the code to the container
+COPY . .
