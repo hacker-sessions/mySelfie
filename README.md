@@ -21,6 +21,7 @@ $ foreman start -f Procfile.dev -p 3000
 ```
 $ docker-compose build
 $ docker-compose run --rm website bin/setup
+$ docker-compose up
 ```
 `http://localhost:5000/tags`
 
